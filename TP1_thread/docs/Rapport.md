@@ -7,7 +7,7 @@ INF3
 # Rapport programmation avancée
 
 <br><br>
-Ce document permet de mettre en avant ce qui a été vu lors des séances de TD en cours de programmation avancée
+Ce document permet de mettre en avant ce qui a été vu lors des séances de TP de programmation avancée
 
 </div>
 
@@ -15,9 +15,9 @@ Ce document permet de mettre en avant ce qui a été vu lors des séances de TD 
 
 ## Plan
 - ### [I - Introduction](#p1)
-- ### [II - Théorie](#p2)
-- ### [III - Diagramme des classes](#p3)
-- ### [IV - TP](#p4)
+- ### [II - TP](#p2)
+- ### [Première séance de TP ](#p3)
+- ### [Deuxième séance de TP ](#p4)
 
 <br><br><br>
 
@@ -27,41 +27,51 @@ Ce document permet de mettre en avant ce qui a été vu lors des séances de TD 
 
 ### <a name="p1"></a> I - Introduction
 
-Le document suivant à pour but d'effectuer un compte rendu des séances de TD. On incluera à celui-ci des explications , des diagrammes effectués et des conclusions apportées. 
+Le document suivant à pour but d'effectuer un compte rendu des séances de TP. On incluera à celui-ci des explications , les diagrammes effectués et les conclusions apportées. 
 
+
+### <a name="p2"></a> II - TP 
+
+#### <a name="p3"></a> Première séance de TP 
+
+En TP, nous avons commencé par effectuer le diagramme des classes du projet en se basant sur le code des classes que l'on possède. 
+<br><br>
+<img height="400" width="700" src="../img/TP1DiagrammeClasse.PNG" title="diagramme"/>
+<br>
+*figure 1 : Diagramme de classes*
+<br><br>
+Nous avons identifier 3 classes : UneFenetre, UnMobile et TpMobile. Nous avons également l'interface Runnable ainsi que les classes JFrame et JPanel.
+<br>
+TpMobile dépend de la classe une fenêtre puisque dans cette même classe on appelle une nouvelle fenêtre.
+<br>
+UneFenetre hérite de la classe mère JFrame. De plus, on s'aperçoit qu'on a un mobile en tant qu'attribut de la classe UneFenetre. Il y a donc une association entre les classes UneFenetre et UnMobile.
+<br>
+Enfin, la classe UnMobile hérite de la classe mère JPanel et utilise l'interface Runnable.
+En appliquant tout ce qui vient d'être énumérer, on obtient le diagramme ci-dessus.
 <br>
 
-### <a name="p2"></a> II - Théorie
 
-Nous avons commencer par étudier l'architecture de la machine qui se trouve en face de nous.
+<br>Par la suite, nous avons commencé à rédiger le constructeur de la classe UneFenetre
 
-SALLE G25 :
+<img height="366" width="524" src="../img/Contructeur_UneFenetre.jpg" title="diagramme"/>
 
-- Processeur : Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz   3.60 GHz
-- RAM installée : 8 GO
-- 4ème génération
-- 4 coeurs 8 threads
-- Capacité mémoire 32 GB
-- Cache 8 MG Intel Smart cache
+*figure 2 : Constructeur de la classe UneFenetre*
+<br><br>
+Nous avons créer un composant graphique, un mobile appelé <i>sonMobile</i> et l'avons ajouter au conteneur principal de la fenêtre. Le mobile sera donc affiché dans ce conteneur. Une fois cette étape effectuée, on créé un Thread *laTache* en lui passant le mobile précédemment créé. Puis, on lance le Thread.
 
-SALLE I21 :
+#### <a name="p4"></a> Deuxième séance de TP
 
-L'architecture est semblable à celle de la salle G25, à l'exception de la taille de la RAM qui est de 16 Go. Cela signifie que les performances seront plus rapides, et qu'un code développé dans la salle G25 fonctionnera sans problème dans la salle I21. Cependant, l'inverse n'est pas forcément vrai.
+Nous avons commencé par ajouter la classe Thread dans le diagramme de classes, ce qui nous donne l'image suivante : 
+<br><br>
+<img height="500" width="700" src="../img/TP1DiagrammeClasseThread.PNG" title="diagrammeThread"/>
 
-### <a name="p3"></a> III - Diagramme des classes 
+*figure 3 : Diagramme de classes avec la classe Thread et l'interface Runnable*
+<br><br>
+La classe Thread possède un contructeur qui utilise un objet parRunnable de l'interface Runnable, c'est pour cela que la classe Thread dépend de l'interface Runnable. Elle possède également une méthode start qui permet de démarrer le Thread. 
+La classe UneFenetre dépend de cette classe car dans son contructeur on appelle la méthode start de la classe Thread. 
 
-Nous avons identifier 3 classes : UneFenetre, UnMobile et TpMobile. Nous avons également l'interface Runnable ainsi que les classes JFrame et JPanel. 
-<br>
-TpMobile dépend de la classe une fenêtre puisque dans cette même classe on appelle une nouvelle fenêtre. 
-<br>
-UneFenetre hérite de la classe mère JFrame. De plus, on s'aperçoit qu'on a un mobile en tant qu'attribut de la classe UneFenetre. Il y a donc une association entre les classes UneFenetre et UnMobile. 
-<br>
-Enfin, la classe UnMobile hérite de la classe mère JPanel et utilise l'interface Runnable. 
-En appliquant tout ce qui vient d'être énumérer, on obtient le diagramme suivant : 
-<br>
+<br> Dans une seconde partie de la séance, nous avons essayé de faire en sorte que le mobile aille de gauche à droite (ce qui était déjà fait) puis de droite à gauche. Dans un premier temps, nous avons identifié la partie du code qui effectué cette action. Elle se trouve dans la méthode run de la classe UnMobile. Ainsi, nous avons ajouter la partie du code suivante :
+<br><br>
+<img height="443" width="789" src="../img/methodeRun.PNG" title="code"/>
 
-<img height="400" width="700" src="TP1DiagrammeClasse.PNG" title="diagramme"/>
-
-### <a name="p4"></a> IV - TP
-
-En TP, nous avons commencé à rédiger le constructeur de la classe UneFenetre 
+En fin de séance il s'agissait dans le constructeur de la classe UneFenetre d'ajouter un bouton permettant d'arrêter ou continuer la course du mobile avec les méthodes suspend() et resume().  
