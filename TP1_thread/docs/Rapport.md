@@ -74,4 +74,6 @@ La classe UneFenetre dépend de cette classe car dans son contructeur on appelle
 <br><br>
 <img height="443" width="789" src="../img/methodeRun.PNG" title="code"/>
 
+*figure 4 : Méthode run de la classe UnMobile*
+
 En fin de séance il s'agissait dans le constructeur de la classe UneFenetre d'ajouter un bouton permettant d'arrêter ou continuer la course du mobile avec les méthodes suspend() et resume().  
