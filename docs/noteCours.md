@@ -103,3 +103,12 @@ Principes Exclusion mutuelle (Mutex) :
 * si un processus est bloqué, il peut traverser le code que si il y aucun processus dans la section critique
 * si il y a plusieurs processus bloquées, un d'entre eux peut rentrer au bout d'un temps fini
 * La solution est la même pour tous
+
+Wait() et signal()
+
+semaphore : tour de contrôle qui envoie des signaux pour contôler les passages côtiers (il regarde si il peut si il peut pas on utilise wait())
+wait() : attente de la ressource
+signal() : envoie un signal de sortie 
+
+Ainsi, avec le signal le sémaphore sait si la ressource est vide et peut ordonner à quelqu'un de passer (dans la zone "en cours d'exécution). Si il n'a pas de signal les autres attendent (wait)
+
