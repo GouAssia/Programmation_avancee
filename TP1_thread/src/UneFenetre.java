@@ -9,7 +9,7 @@ class UneFenetre extends JFrame {
     Button sonBouton;*/
     private ArrayList<UnMobile> mobiles;
     private ArrayList<Thread> threads;
-    private final int LARG = 600, HAUT = 400;
+    private final int LARG = 1500, HAUT = 1000;
 
 
     public UneFenetre() {
@@ -19,12 +19,14 @@ class UneFenetre extends JFrame {
         mobiles = new ArrayList<>();
         threads = new ArrayList<>();
 
+        semaphoreGenerale sema = new semaphoreGenerale(2);
+
         Container container = getContentPane();
-        container.setLayout(new GridLayout(6,1));
+        container.setLayout(new GridLayout(3,1));
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 3; i++) {
 
-            mobiles.add(new UnMobile(LARG, HAUT/6));
+            mobiles.add(new UnMobile(LARG, HAUT/3, sema));
             container.add(mobiles.get(i));
             Thread latache = new Thread(mobiles.get(i));
             threads.add(latache);

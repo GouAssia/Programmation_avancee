@@ -98,6 +98,8 @@ Mémoire distribuée :
 <br>Pourquoi des fois on a une configuration avec beaucoup de coeurs ? <br>
 Généralement c'est plus facile de mettre beaucoup de cœurs avec une fréquence plus petite pour éviter de trop chauffer. De plus, c'est moins couteux car on utilise moins la climatisation.
 
+### Cours Semaphore 
+
 Principes Exclusion mutuelle (Mutex) :
 * 0 ou 1 personne peut traverser le code
 * si un processus est bloqué, il peut traverser le code que si il y aucun processus dans la section critique
@@ -111,4 +113,8 @@ wait() : attente de la ressource
 signal() : envoie un signal de sortie 
 
 Ainsi, avec le signal le sémaphore sait si la ressource est vide et peut ordonner à quelqu'un de passer (dans la zone "en cours d'exécution). Si il n'a pas de signal les autres attendent (wait)
+
+### Cours Moniteurs 
+
+Un moniteur est un mécanisme de synchronisation qui contrôle l'accès à une ressource partagée par plusieurs threads. 
 

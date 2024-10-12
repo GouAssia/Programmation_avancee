@@ -18,6 +18,7 @@ Ce document permet de mettre en avant ce qui a été vu lors des séances de TP 
 - ### [II - TP](#p2)
 - ### [Première séance de TP ](#p3)
 - ### [Deuxième séance de TP ](#p4)
+- ### [Troisième séance de TP ](#p5)
 
 <br><br><br>
 
@@ -161,3 +162,56 @@ Dans la classe Affichage on crée un objet *sem* de type semaphoreBinaire. Dans 
 *figure 9 : La classe Main en utilisant le semaphore*
 
 Dans la méthode main de la classe Main, on commence par instancier un nouveau semaphore binaire avec pour valeur initiale 1 indiquant qu'il est disponible pour un seul thread à la fois. Puis, nous allons créer quatre threads différents retournant des chaines de caractères différentes partageant le même sémaphore.
+
+On obtient le diagramme des classes suivant : 
+
+<img height="409" width="943" src="../img/TP2_semaphore_diagramme_classes.PNG" title="diagramme semaphore"/>
+
+*figure 10 : TP2 Diagramme des classes*
+
+Nous avons les classes semaphoreBinaire, semaphore, main et affichage. La classe semaphoreBinaire hérite de la classe semaphore et est associé à la classe Main grâce à l'élement semaphoreBinaire *sem* crée dans cette classe afin qu'il soit associé à chaque thread. Elle est également associée à la classe Affichage suite à l'ajout du champ *sem* de type semaphoreBinaire. La classe Affichage hérite de la classe Thread. Enfin, Main dépend de la classe Thread suite à l'instanciation et la mise en marche de thread dans cette classe. 
+
+### <a name="p6"></a> Quatrième séance de TP 
+
+Dans cette première partie de la séance, nous avons commencé par reprendre le TP1 sur les mobiles et imaginer une découpe en trois de la fenêtre. Puis, il fallait faire en sorte que une fois arrivé dans la seconde partie de la fenêtre, certains mobiles continuaient à se déplacer tandis que certains devaient s'arrêter. La méthode du semaphore est à utiliser. Une fois la seconde zone libre les mobiles arrêtés pouvaient continuer leur chemin.
+
+Pour cela, nous avons ajouté la partie suivante au code de la classe UnMobile : 
+
+<img height="584" width="896" src="../img/DivisionEcranEn3.PNG" title="Division écran"/>
+
+<img height="570" width="912" src="../img/DivisionEcranEn3part2.PNG" title="Division écran 2"/>
+
+<img height="505" width="855" src="../img/DivisionEcranEn3part3.PNG" title="Division écran 3"/>
+
+*figure 11 : Classe UnMobile*
+
+On créer les classes semaphore et semaphoreGenerale s'inspirant des classes semaphore et semaphoreBinaire déjà effectuées dans les TP précédents.
+
+On commence par créer un champ semaphoreGenerale de type semaphoreGenerale. Par la suite dans la méthode run, dans un sens (de gauche à droite) on fait en sorte que les mobiles se déplacent dans la première partie de la fenêtre en la divisant par 3. Puis, une fois arrivé au début de la deuxième partie de la fenêtre on fait attendre certains mobiles. Les autres mobiles continuent leur course jusqu'à 2/3 de la fenêtre. Une fois les mobiles arrivés à 2/3 de la fenêtre ils signalent à ceux arrêtés de reprendre et continuent jusqu'à la fin de la fenêtre. Nous effectuons ça de gauche à droite et de droite à gauche. 
+
+<img height="442" width="628" src="../img/DivisionEcranClasseFenetre.PNG" title="Division fenetre"/>
+
+*figure 12 : Classe UneFenetre*
+
+Dans le constructeur de la classe fenêtre, nous allons créer une nouvelle instance d'un semaphore de type semaphoreGenerale de valeur 2 ce qui veut dire que 2 threads peuvent accéder simultanément à la ressource partagée. Puis, on passe le sémaphore à la nouvelle instance de UnMobile. 
+
+Dans la deuxième partie de la séance, nous avons assiter au cours sur les moniteurs. 
+Par la suite de cela, nous avons réalisé la première question du TD3. 
+
+Nous avons commencé par créer les classes Bal pour la boite aux lettres, consommateur pour la personne qui récupère la lettre puis producteur en guise de facteur. 
+
+<img height="621" width="854" src="../img/Bal.PNG" title="La classe Bal"/>
+
+*figure 13 : Classe Bal*
+
+La classe Bal est composée des méthodes depos, pour déposer la lettre et la méthode retrait pour la retirer.
+Dans la méthode depos, on commence par attendre si la lettre n'est pas vide ce qui veut dire qu'il y en a déjà une de déposer. Si aucune lettre est déposé on dépose la notre. 
+<br>Dans la méthode retrait, on attend si on a aucune lettre dans la boite aux lettres sinon on retire la lettre et on notifie qu'il y a plus rien dans la boite aux lettres. 
+
+Dans la classe consommateur, la méthode run est créé dans laquelle nous allons appeler la méthode retrait pour l'appliquer au champ bal crée pour retirer la lettre. Dans la classe producteur, la méthode run est créé dans laquelle nous allons appeler la méthode depos pour l'appliquer au champ bal créé pour déposer une lettre.
+
+Nous obtenons le diagramme des classes suivants pour l'exercice 1 du TD3 : 
+
+<img height="546" width="659" src="../img/TD3_diagramme_classes.PNG" title="TD3 diagramme"/>
+
+*figure 14 : TD3 Diagramme des classes*
