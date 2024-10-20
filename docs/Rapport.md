@@ -19,6 +19,8 @@ Ce document permet de mettre en avant ce qui a été vu lors des séances de TP 
 - ### [Première séance de TP ](#p3)
 - ### [Deuxième séance de TP ](#p4)
 - ### [Troisième séance de TP ](#p5)
+- ### [Quatrième séance de TP ](#p6)
+- ### [Cinquième séance de TP ](#p7)
 
 <br><br><br>
 
@@ -31,7 +33,8 @@ Ce document permet de mettre en avant ce qui a été vu lors des séances de TP 
 Le document suivant à pour but d'effectuer un compte rendu des séances de TP. On incluera à celui-ci des explications , les diagrammes effectués et les conclusions apportées. 
 
 
-### <a name="p2"></a> II - TP 
+### <a name="p2"></a> II - TP
+## Mémoire Partagée
 
 ### TP 1 : Introduction aux threads avec des mobiles 
 
@@ -200,7 +203,9 @@ Par la suite de cela, nous avons réalisé la première question du TD3.
 
 Nous avons commencé par créer les classes Bal pour la boite aux lettres, consommateur pour la personne qui récupère la lettre puis producteur en guise de facteur. 
 
-<img height="621" width="854" src="../img/Bal.PNG" title="La classe Bal"/>
+<img height="466" width="801" src="../img/Bal.PNG" title="La classe Bal"/>
+
+<img height="334" width="818" src="../img/bal2.PNG" title="La deuxième partie de la classe Bal "/>
 
 *figure 13 : Classe Bal*
 
@@ -212,6 +217,77 @@ Dans la classe consommateur, la méthode run est créé dans laquelle nous allon
 
 Nous obtenons le diagramme des classes suivants pour l'exercice 1 du TD3 : 
 
-<img height="546" width="659" src="../img/TD3_diagramme_classes.PNG" title="TD3 diagramme"/>
+<img height="519" width="556" src="../img/TD3_diagramme_classes.PNG" title="TD3 diagramme"/>
 
 *figure 14 : TD3 Diagramme des classes*
+
+### <a name="p7"></a> Cinquième séance de TP 
+
+Nous avons commencé cette cinquième séance en finissant la deuxième question du premier exercice du TD/TP 2.  
+Pour cela il fallait ajouter quelques modifications aux classes Producteur et Consommateur afin de faire en sorte que quand l'utilisateur entre la lettre Q on arrêtait les Threads. 
+
+Voici la classe Consommateur modifiée : 
+
+<img height="526" width="665" src="../img/consommateur.PNG" title="Classe Consommateur"/>
+
+*figure 15 : La classe Consommateur*
+
+Tant que la lettreRetiree n'a pas pour intitulé "Q", on continue de retirer les lettres de la boite aux lettres. Si l'utilisateur entre "Q", un message apparait pour prévenir l'utilisateur que le consommateur s'arrête.
+
+<img height="617" width="808" src="../img/producteur.PNG" title="Classe Producteur"/>
+
+On déclare un scanner permettant de lire les réponses de l'utilisateur. Tant que l'utilisateur n'a pas entré la lettre Q on effectue la boucle qui demande à l'utilisateur de entrer une lettre et la dépose. Si il entre Q alors l'utilisateur reçoit un message en disant que le producteur s'est arrêté. 
+
+Dans la deuxième partie de la séance, la notion d'API concurrent, nous a été introduite. 
+Puis on a récupéré le code des classes Boulangerie, Boulanger, Mangeur et Pain à l'adresse : https://blog.paumard.org/cours/java-api/chap05-concurrent-queues.html.
+En essayant de tester le code de ses classes on s'est aperçu que des parties du code manquaient notamment des champs. Ainsi l'import de classes et l'intégration de champs et constructeurs ont été ajouté. 
+
+Nous avons importé les éléments suivants dans la classe Boulangerie : 
+
+```java
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
+```
+
+Dans la classe Boulanger, il était nécessaire d'ajouter un champ de type Boulangerie pour pouvoir utiliser l'objet *boulangerie*
+
+```java
+public class Boulanger implements Runnable { 
+
+    private Boulangerie boulangerie;
+
+    public Boulanger(Boulangerie boulangerie) {
+        this.boulangerie = boulangerie;
+    }
+}
+```
+Il était évident de faire de même pour la classe Mangeur en important Random
+
+```java
+import java.util.Random;
+
+public  class Mangeur  implements Runnable {
+    private Boulangerie boulangerie;
+    private Random rand;
+
+    public Mangeur(Boulangerie boulangerie, Random rand) {
+        this.boulangerie = boulangerie;
+        this.rand = rand;
+    }
+}
+  ```
+Enfin, dans la classe Main, il fallait suite à l'ajout du constructeur dans la classe Mangeur, ajouter le champ *rand* dans son appel
+
+```java
+// notre mangeur est aussi un runnable
+    Mangeur mangeur =  new Mangeur(boulangerie, rand) ;
+```
+Après avoir modifier ses classes, le diagramme des classes de ce projet a été réalisé : 
+
+<img height="542" width="722" src="../img/diagramme_classe_TP_API.PNG" title="Diagramme classe TP API"/>
+
+Nous avons les classes Boulanger, Boulangerie, Mangeur et Pain ainsi que le package concurrent contenant ArrayBlockingQueue, BlockingQueue et TimeUnit. La classe Boulangerie est associé à BlockingQueue du package concurrent et la classe Pain grâce au champs *queue* de type BlockingQueue qui contient seulement des objets de type Pain. Les classes Boulanger et Mangeur sont associées à la classe Boulangerie grâce au champs *boulangerie*. Elles dépendent toutes les deux de Pain car la classe Boulanger créée une nouvelle instance de Pain et l'ajoute à la Boulangerie tandis que Mangeur essaie d'acheter du pain. Enfin, Boulanger et Mangeur héritent de la classe Thread.  
+
+
+En fin de séance la partie du cours sur la parallélisation de code nous a été introduite. [Note de cours](noteCours.md)

@@ -118,3 +118,41 @@ Ainsi, avec le signal le sémaphore sait si la ressource est vide et peut ordonn
 
 Un moniteur est un mécanisme de synchronisation qui contrôle l'accès à une ressource partagée par plusieurs threads. 
 
+### Parallélisation du code
+
+Paradigmes : structure algorithmique pour implémenter un algorithme en parallèle (exemple : client serveur car envoie de requêtes)
+
+Plusieurs aspects sont à considérer :
+
+- Architecture : mémoire partagée mémoire distribuée ou les deux (on utilise 2 machines différentes ayant chacune sa mémoire (une mémoire distribuée) et l'ensemble des deux => mémoire partagée)
+- Algorithme
+
+
+Exemple SAE : 
+
+Raspberry PI 4 : 4 coeurs (mémoire partagée)
+RPI zero : monocoeur (mémoire distribuée)
+
+SIMD (single instruction multiple data) <br>
+MIMD (multiple instructions on multiple data)
+
+Si on code en utilisant la mémoire on pourra pas faire ça en mémoire partagée mais on peut par envoie de message. On dit qu'il est portable. 
+
+MPI (message passing Interface) : outil (bibliothèque) pour le calcul scientifique à haute performance permettant d'utiliser plusieurs ordinateurs. 
+
+OpenMP (open Multi-Processing) : interface de programmation pour le calcul parallèle en mémoire partagée
+
+Modèle vis à vis du logiciel: 
+- Parallélisme de tâche : on décompose en sous tâches, on regarde sur quelles données elles travaillent, si elles travaillent sur les mêmes tâches (y'a pas besoin d'échanges de données) et on associe ses tâches aux processus  --> ce qu'on fait depuis le début
+- Parallélisme de données : on travaille sur des structures de données homogènes (matrices, des tableaux, vecteurs), on associe une tâche à une case du tableau puis on découpe l'ensemble des cases et les processus les manipule 
+
+--> C'est la même chose que le parallélisme de tâche mais dans le sens inverse 
+
+Quand on fait du web on pense souvent parallélisme de tâche car la structure n'est pas homogène et pour les calculs scientifiques plutôt parallélisme de données. 
+
+Modèle vis à vis du hardware:
+
+SISD : Single Instruction Single Data
+SIMD : Single Instruction Multiple Data
+MIMD : Multiple Instruction Multiple Data
+
