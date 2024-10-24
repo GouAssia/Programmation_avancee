@@ -7,7 +7,7 @@ INF3
 # Rapport programmation avancée
 
 <br><br>
-Ce document permet de mettre en avant ce qui a été vu lors des séances de TP de programmation avancée
+Ce document permet de mettre en avant ce qui a été vu lors des séances de TP de programmation avancée en développant les démarches à suivre 
 
 </div>
 
@@ -16,25 +16,27 @@ Ce document permet de mettre en avant ce qui a été vu lors des séances de TP 
 ## Plan
 - ### [I - Introduction](#p1)
 - ### [II - TP](#p2)
-- ### [Première séance de TP ](#p3)
-- ### [Deuxième séance de TP ](#p4)
-- ### [Troisième séance de TP ](#p5)
-- ### [Quatrième séance de TP ](#p6)
-- ### [Cinquième séance de TP ](#p7)
+  - ### [Première séance de TP ](#p3)
+  - ### [Deuxième séance de TP ](#p4)
+  - ### [Troisième séance de TP ](#p5)
+  - ### [Quatrième séance de TP ](#p6)
+  - ### [Cinquième séance de TP ](#p7)
 
 <br><br><br>
 
 ----------
 
-<br><br><br>
+<br><br>
+<div align="center" style="font-size: 24px;">
+Mémoire Partagée
+</div>
 
-### <a name="p1"></a> I - Introduction
+## <a name="p1"></a> I - Introduction
 
-Le document suivant à pour but d'effectuer un compte rendu des séances de TP. On incluera à celui-ci des explications , les diagrammes effectués et les conclusions apportées. 
+Le document suivant à pour but d'effectuer un compte rendu des séances de TP. On incluera à celui-ci des explications, les diagrammes effectués et les conclusions apportées. 
+Ces séances de TP ont porté sur la programmation concurrente en se focalisant sur l'utilisation de la mémoire partagée. La mémoire partagée est un mécanisme qui permet à plusieurs threads d'accéder simultanément à des ressources communes en mémoire. 
 
-
-### <a name="p2"></a> II - TP
-## Mémoire Partagée
+## <a name="p2"></a> II - TP
 
 ### TP 1 : Introduction aux threads avec des mobiles 
 
@@ -56,8 +58,7 @@ Enfin, la classe UnMobile hérite de la classe mère JPanel et utilise l'interfa
 En appliquant tout ce qui vient d'être énumérer, on obtient le diagramme ci-dessus.
 <br>
 
-
-<br>Par la suite, nous avons commencé à rédiger le constructeur de la classe UneFenetre
+Par la suite, nous avons commencé à rédiger le constructeur de la classe UneFenetre afin d'afficher un mobile qui se déplace de gauche à droite.
 
 <img height="366" width="524" src="../img/Contructeur_UneFenetre.jpg" title="diagramme"/>
 
@@ -82,7 +83,7 @@ La classe UneFenetre dépend de cette classe car dans son contructeur on appelle
 
 *figure 4 : Méthode run de la classe UnMobile*
 
-En fin de séance il s'agissait dans le constructeur de la classe UneFenetre d'ajouter un bouton permettant d'arrêter ou continuer la course du mobile avec les méthodes suspend() et resume().  
+En fin de séance il s'agissait dans le constructeur de la classe UneFenetre d'ajouter un bouton permettant d'arrêter ou continuer la course du mobile avec les méthodes suspend() et resume() conçues pour la gestion des threads. 
 
 ### <a name="p5"></a> Troisième séance de TP 
 
@@ -104,6 +105,11 @@ Nous avons commencé le TP en créant plusieurs mobiles sur une même colonne qu
 
 Le code ci-dessus a pour but de faire avancer plusieurs mobiles en même temps. Ces mobiles sont organisés dans une même colonne, les uns en dessous des autres. 
 Dans le code, on commence par initialiser et déclarer une liste contenant tout les mobiles et une liste pour les threads qui les associe. On ajoute un composant graphique GridLayout permettant de gérer la mise en page du conteneur. On lui définit une colonne et 6 lignes (une pour chaque mobile). Pour chaque tour de la boucle for, une nouvelle instance de UnMobile avec la largeur et hauteur est implémentée. On ajoute ces instances au conteneur puis pour chaque mobile on créé un thread. 
+
+En fin de séance, nous avons ajouté la fonctionnalité suivante : 
+faire en sorte que chaque mobile se déplace à une allure différente et aléatoire. 
+
+``final int sonTemps = (int) Math.floor(Math.random() * 60) + 1;``
 
 ### TP 2 : Synchronized et Semaphore 
 
@@ -198,7 +204,7 @@ On commence par créer un champ semaphoreGenerale de type semaphoreGenerale. Par
 
 Dans le constructeur de la classe fenêtre, nous allons créer une nouvelle instance d'un semaphore de type semaphoreGenerale de valeur 2 ce qui veut dire que 2 threads peuvent accéder simultanément à la ressource partagée. Puis, on passe le sémaphore à la nouvelle instance de UnMobile. 
 
-Dans la deuxième partie de la séance, nous avons assiter au cours sur les moniteurs. 
+Dans la deuxième partie de la séance, nous avons assiter au cours sur [les moniteurs](noteCours.md).
 Par la suite de cela, nous avons réalisé la première question du TD3. 
 
 Nous avons commencé par créer les classes Bal pour la boite aux lettres, consommateur pour la personne qui récupère la lettre puis producteur en guise de facteur. 
@@ -286,6 +292,8 @@ Enfin, dans la classe Main, il fallait suite à l'ajout du constructeur dans la 
 Après avoir modifier ses classes, le diagramme des classes de ce projet a été réalisé : 
 
 <img height="542" width="722" src="../img/diagramme_classe_TP_API.PNG" title="Diagramme classe TP API"/>
+
+*figure 16 : TP API Diagramme des classes*
 
 Nous avons les classes Boulanger, Boulangerie, Mangeur et Pain ainsi que le package concurrent contenant ArrayBlockingQueue, BlockingQueue et TimeUnit. La classe Boulangerie est associé à BlockingQueue du package concurrent et la classe Pain grâce au champs *queue* de type BlockingQueue qui contient seulement des objets de type Pain. Les classes Boulanger et Mangeur sont associées à la classe Boulangerie grâce au champs *boulangerie*. Elles dépendent toutes les deux de Pain car la classe Boulanger créée une nouvelle instance de Pain et l'ajoute à la Boulangerie tandis que Mangeur essaie d'acheter du pain. Enfin, Boulanger et Mangeur héritent de la classe Thread.  
 
